@@ -59,3 +59,21 @@ website = read_html(URL)
 needed_txt = website %>% html_nodes("tr") %>% html_text()
 needed_txt
 
+
+#Practice1: 擷取PTT勘版文章
+URL = "https://www.ptt.cc/bbs/Baseball/index.html"
+website = read_html(URL)
+
+needed_html = website %>% html_nodes("a")
+needed_html
+needed_txt = needed_html %>% html_text()
+needed_txt
+intrested_pos = grep("[新聞]", needed_txt, fixed = TRUE)
+needed_txt[intrested_pos]
+needed_link = needed_html[intrested_pos] %>% html_attr("href")  #擷取文章連結
+i = 1
+sub_link = paste("https://www.ptt.cc", needed_link[i], sep = "")
+sub_website = read_html(sub_link) 
+
+article_info = sub_website %>% html_nodes(".article-meta-value")
+article_info
