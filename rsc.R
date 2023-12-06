@@ -50,3 +50,12 @@ NTU_info = function () {
 
 NTU_info()
 
+library(rvest)
+
+URL = "https://reg.ntuh.gov.tw/EmgInfoBoard/NTUHEmgInfo.aspx"
+
+website = read_html(URL)
+
+needed_txt = website %>% html_nodes("tr") %>% html_text()
+needed_txt
+
